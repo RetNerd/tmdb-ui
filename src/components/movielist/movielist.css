@@ -1,0 +1,10 @@
+#movie-table{
+    width: 80%;
+    display: inline-flex;
+    position: relative;
+    margin: 20px;
+    float: right;
+}
+.movie-cell{
+    text-align: left;
+}
