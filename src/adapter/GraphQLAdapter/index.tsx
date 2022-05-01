@@ -1,3 +1,3 @@
-import { GraphQLAdapter } from "./GraphQLAdapter";
+import { fetchMovies, searchMovies } from "./GraphQLAdapter";
 
-export default GraphQLAdapter;
+export default { fetchMovies, searchMovies };

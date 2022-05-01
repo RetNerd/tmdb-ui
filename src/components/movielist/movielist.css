@@ -1,10 +1,16 @@
-#movie-table{
-    width: 80%;
-    display: inline-flex;
-    position: relative;
-    margin: 20px;
-    float: right;
-}
+
 .movie-cell{
     text-align: left;
+}
+
+.thumbnail{
+    width:0%
+}
+
+.collapse-button{
+    width:0%
+}
+
+img{
+    max-width: 120px;
 }

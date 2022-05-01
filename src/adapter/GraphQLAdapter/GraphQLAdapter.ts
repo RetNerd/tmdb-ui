@@ -1,25 +1,41 @@
-import { gql, useQuery } from "@apollo/client";
+import request, { gql } from 'graphql-request'
 
-export class GraphQLAdapter{
-    graphqlUrl: string;
-    MOVIES_QUERY = gql`
-    query fetchMovies{
-        movies: discoverMovies{
-            id
+const MOVIES_QUERY = gql`
+query fetchMovies{
+    movies: discoverMovies{
+        id
+        name
+        overview
+        releaseDate
+        score
+        genres {
             name
-            overview
-            releaseDate
-            img: poster {
-                url: custom(size: "w185_and_h278_bestv2")
-              }
         }
-    }`;
-
-    constructor(graphqlUrl: string){
-        this.graphqlUrl = graphqlUrl;
+        img: poster {
+            url: custom(size: "w185_and_h278_bestv2")
+          }
     }
+}`;
 
-    /**
+const SEARCH_QUERY = gql`
+query SearchMovies($term: String!) {
+    movies: searchMovies(query: $term) {
+        id
+        name
+        overview
+        releaseDate
+        score
+        genres {
+            name
+        }
+        img: poster {
+            url: custom(size: "w185_and_h278_bestv2")
+          }
+    }
+  }
+`
+
+/**
     * Gets the list of movies
     * 
     * @param offset - The position of the cursor on the movie list
@@ -29,15 +45,13 @@ export class GraphQLAdapter{
     * @returns data: The fetched data
     * @returns fetchMore: A function to query for more data
     */
-    fetchMovies(offset: number, limit:number){
-        let {loading, data, fetchMore} = useQuery(this.MOVIES_QUERY, {
-            variables: {
-                offset: offset,
-                limit: limit
-            }
-        });
-        return {loading, data, fetchMore};
-    }
 
+export function fetchMovies(graphqlUrl: string){
+    return request(graphqlUrl, MOVIES_QUERY);
+     
 }
 
+export function searchMovies(graphqlUrl: string, term: string){
+    return request(graphqlUrl, SEARCH_QUERY, {"term": term});
+    
+}

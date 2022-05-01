@@ -7,10 +7,15 @@ export default class SearchField extends React.Component<{}, { value: string }>{
         super(props)
         this.state = {value: ""};
         this.handleChange = this.handleChange.bind(this);
+        this.getValue = this.getValue.bind(this);
     }
 
     handleChange(event: any){
         this.setState({value: event.target.value});
+    }
+
+    getValue(){
+        return this.state.value;
     }
 
     render(){

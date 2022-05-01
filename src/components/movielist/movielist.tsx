@@ -5,15 +5,17 @@ import React from "react";
 import Movie from "../../model/moviemodel";
 import "./movielist.css"
 
-export default class MovieList extends React.Component{
-    data: Movie[]=[
-        new Movie("The Batman", "Crime, Mystery, Thriller", "7.8", "In his second year of fighting crime, Batman uncovers corruption in Gotham City that connects to his own family while facing a serial killer known as the Riddler."),
-        new Movie("The Batman", "Crime, Mystery, Thriller", "7.8", "In his second year of fighting crime, Batman uncovers corruption in Gotham City that connects to his own family while facing a serial killer known as the Riddler."),
-        new Movie("The Batman", "Crime, Mystery, Thriller", "7.8", "In his second year of fighting crime, Batman uncovers corruption in Gotham City that connects to his own family while facing a serial killer known as the Riddler.")
-    ];
+export default class MovieList extends React.Component<any, { data: Movie[] }>{
 
-    constructor(props: Object){
+    constructor(props: any){
         super(props);
+        this.state = {data: this.props.data};
+    }
+
+    updateData(data: Movie[]){
+        this.setState((state)=>{
+            return {data: data}
+        })
     }
 
     render(){
@@ -23,14 +25,15 @@ export default class MovieList extends React.Component{
                     <TableHead>
                         <TableRow>
                             <TableCell className="movie-cell"></TableCell>
+                            <TableCell className="movie-cell"></TableCell>
                             <TableCell className="movie-cell">Name</TableCell>
                             <TableCell className="movie-cell">Category</TableCell>
                             <TableCell className="movie-cell">Score</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {this.data.map((movie, idx) => (
-                            <Row key = {idx} row = {movie}/> 
+                        {this.state.data.map((movie: Movie, idx: Number) => (
+                            <Row key = {idx.toString()} row = {movie}/> 
                         ))}
                     </TableBody>
                 </Table>
@@ -47,7 +50,7 @@ function Row(props: {row: Movie}){
     return(
         <React.Fragment>
             <TableRow>
-                <TableCell className="movie-cell">
+                <TableCell className="movie-cell collapse-button">
                         <IconButton
                         size="small"
                         aria-label="expand row"
@@ -56,16 +59,19 @@ function Row(props: {row: Movie}){
                         {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
                         </IconButton>
                 </TableCell>
+                <TableCell className="movie-cell thumbnail"><img src={row.thumbUrl.toString()} 
+                /></TableCell>
                 <TableCell className="movie-cell">{row.name}</TableCell>
                 <TableCell className="movie-cell">{row.category}</TableCell>
                 <TableCell className="movie-cell">{row.score}
             </TableCell>
             </TableRow>
             <TableRow>
-                <TableCell className="movie-detail-cell" style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
+                <TableCell className="movie-detail-cell" style={{ padding: 0 }} colSpan={5}>
                     <Collapse in={open} unmountOnExit>
                         <Box>
-                            <Typography className="movie-detail" variant="body1" component="div" gutterBottom>
+                            <Typography className="movie-detail" variant="h4" component="div" style={{margin: 20}}>Overview</Typography>
+                            <Typography className="movie-detail" variant="body1" component="div" gutterBottom style={{margin: 20}}>
                             {row.details}
                             </Typography>
                         </Box>

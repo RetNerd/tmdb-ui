@@ -1,4 +1,35 @@
-.search-field{
+.search-page{
+    display: inline;
+}
+
+.left-panel{
+    width: 15%;
     float: left;
+    position: relative;
+    border: solid;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+#movie-table{
+    position: relative;
+    float: right;
+    width: 80%;
+    margin: 20px
+}
+
+.search-button{
+    position: static;
+}
+
+.search-field{
+    position: static;
+    margin: 20px
+}
+
+.progress-indicator{
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }
 
