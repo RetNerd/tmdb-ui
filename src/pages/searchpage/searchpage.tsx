@@ -1,10 +1,12 @@
-import { Button, CircularProgress } from "@mui/material";
+import { Button, CircularProgress, Stack } from "@mui/material";
 import React from "react";
 import { fetchMovies, searchMovies } from "../../adapter/GraphQLAdapter/GraphQLAdapter";
 import MovieList from "../../components/movielist";
 import SearchField from "../../components/searchfield";
 import Movie from "../../model/moviemodel";
 import "./searchpage.css"
+import Review from "../../model/reviewmodel";
+import Cast from "../../model/castmodel";
 
 export default class SearchPage extends React.Component<{}, {data:Movie[], loading:boolean}>{
     movieList:React.RefObject<MovieList>;
@@ -42,7 +44,13 @@ export default class SearchPage extends React.Component<{}, {data:Movie[], loadi
                 return genre.name;
             }).join(",");
             let imgUrl = element.img ? element.img.url : "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=";
-            return new Movie(imgUrl, element.name,genres , element.score, element.overview);
+            let reviews = element.reviews.map((rv: any)=>{
+                return Review.createReview(rv);
+            });
+            let cast = element.cast.map((cast: any)=>{
+                return Cast.createCast(cast);
+            });
+            return new Movie(element.id, imgUrl, element.name,genres , element.score, element.overview, reviews, cast);
         });
     }
 
@@ -83,11 +91,13 @@ export default class SearchPage extends React.Component<{}, {data:Movie[], loadi
         }
         return(
             <div color="primary" className="search-page">
-                <div className="left-panel">
-                    <SearchField ref={this.searchField}></SearchField>
-                    <Button color="secondary" style={{marginLeft: 20, marginBottom: 20}} variant="outlined" className="search-button" onClick={this.searchMovies}>Search</Button>
-                </div>
-                {movies}
+                <Stack direction="row">
+                    <Stack className="left-panel">
+                        <SearchField ref={this.searchField}></SearchField>
+                        <Button color="secondary" style={{marginLeft: 20, marginBottom: 20}} variant="outlined" className="search-button" onClick={this.searchMovies}>Search</Button>
+                    </Stack>
+                    {movies}
+                </Stack>
             </div>
         );
     }

@@ -12,9 +12,29 @@ query fetchMovies{
             name
         }
         img: poster {
-            url: custom(size: "w185_and_h278_bestv2")
+          url: custom(size: "w185_and_h278_bestv2")
+        }
+        reviews {
+          id
+          author
+          content
+          language {
+            code
+            name
           }
-    }
+        }
+        cast {
+          id
+          person {
+            name
+          }
+          role {
+            ... on Cast {
+              character
+            }
+          }
+        }
+      }
 }`;
 
 const SEARCH_QUERY = gql`
@@ -29,9 +49,29 @@ query SearchMovies($term: String!) {
             name
         }
         img: poster {
-            url: custom(size: "w185_and_h278_bestv2")
+          url: custom(size: "w185_and_h278_bestv2")
+        }
+        reviews {
+          id
+          author
+          content
+          language {
+            code
+            name
           }
-    }
+        }
+        cast {
+          id
+          person {
+            name
+          }
+          role {
+            ... on Cast {
+              character
+            }
+          }
+        }
+      }
   }
 `
 

@@ -6,9 +6,6 @@
     width: 15%;
     float: left;
     position: relative;
-    border: solid;
-    border-radius: 10px;
-    margin-left: 10px;
 }
 
 #movie-table{
@@ -20,6 +17,7 @@
 
 .search-button{
     position: static;
+    width: 30%;
 }
 
 .search-field{
