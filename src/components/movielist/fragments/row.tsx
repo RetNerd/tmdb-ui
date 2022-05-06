@@ -1,7 +1,8 @@
 import { KeyboardArrowUp, KeyboardArrowDown } from "@mui/icons-material";
-import { TableRow, TableCell, IconButton, Collapse, Box, Typography } from "@mui/material";
+import { TableRow, TableCell, IconButton, Collapse, Typography, List } from "@mui/material";
 import React from "react";
 import Movie from "../../../model/moviemodel";
+import { WikiModalLink } from "../../wikimodal/wikimodal";
 import { CastList } from "./castlist";
 import { ReviewList } from "./reviewlist";
 
@@ -20,23 +21,25 @@ export function Row(props: {row: Movie}){
                         {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
                         </IconButton>
                 </TableCell>
-                <TableCell className="movie-cell thumbnail"><img src={row.thumbUrl.toString()} 
+                <TableCell className="movie-cell thumbnail"><img alt="Not provided" src={row.thumbUrl.toString()} 
                 /></TableCell>
                 <TableCell className="movie-cell">{row.name}</TableCell>
                 <TableCell className="movie-cell">{row.category}</TableCell>
+                <TableCell className="movie-cell">{row.released.getFullYear()}</TableCell>
                 <TableCell className="movie-cell">{row.score}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell className="movie-detail-cell" style={{ padding: 0 }} colSpan={5}>
                     <Collapse in={open} unmountOnExit>
-                        <Box>
+                        <List>
                             <Typography className="movie-detail" variant="h4" component="div" style={{margin: 20}}>Overview</Typography>
                             <Typography className="movie-detail" variant="body1" component="div" gutterBottom style={{margin: 20}}>
-                            {row.details}
+                                {row.details}
                             </Typography>
                             <ReviewList name="Reviews" data={row.reviews}/>
                             <CastList name="Cast" data={row.cast}/>
-                        </Box>
+                            <WikiModalLink name="External" searchTerm={row.name+" (movie) "+row.released.getFullYear()}></WikiModalLink>
+                        </List>
                     </Collapse>
                 </TableCell>
             </TableRow>

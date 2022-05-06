@@ -1,4 +1,4 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Collapse, Typography, Box, IconButton, Stack } from "@mui/material";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 
 import React from "react";
 import Movie from "../../model/moviemodel";
@@ -28,6 +28,7 @@ export default class MovieList extends React.Component<any, { data: Movie[] }>{
                             <TableCell className="movie-cell"></TableCell>
                             <TableCell className="movie-cell">Name</TableCell>
                             <TableCell className="movie-cell">Category</TableCell>
+                            <TableCell className="movie-cell">Released</TableCell>
                             <TableCell className="movie-cell">Score</TableCell>
                         </TableRow>
                     </TableHead>

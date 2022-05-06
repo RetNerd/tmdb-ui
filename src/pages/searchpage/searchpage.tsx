@@ -50,7 +50,7 @@ export default class SearchPage extends React.Component<{}, {data:Movie[], loadi
             let cast = element.cast.map((cast: any)=>{
                 return Cast.createCast(cast);
             });
-            return new Movie(element.id, imgUrl, element.name,genres , element.score, element.overview, reviews, cast);
+            return new Movie(element.id, imgUrl, element.name,genres , element.score, element.overview, reviews, cast, element.releaseDate);
         });
     }
 

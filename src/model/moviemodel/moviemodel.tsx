@@ -10,7 +10,8 @@ export default class Movie{
     readonly details: String;
     readonly reviews: Review[];
     readonly cast: Cast[];
-    constructor(id: String, thumbUrl:String,name:String, category:String, score:String, details:String, reviews: Review[], cast: Cast[]){
+    readonly released: Date;
+    constructor(id: String, thumbUrl:String,name:String, category:String, score:String, details:String, reviews: Review[], cast: Cast[], released: Date){
         this.id = id;
         this.name = name;
         this.category = category;
@@ -19,6 +20,7 @@ export default class Movie{
         this.thumbUrl = thumbUrl;
         this.reviews = reviews;
         this.cast = cast;
+        this.released = new Date(released);
     }
 
 }

@@ -6,6 +6,7 @@
     width: 15%;
     float: left;
     position: relative;
+    border-radius: 20rem;
 }
 
 #movie-table{
