@@ -3,6 +3,12 @@ import { Stack, IconButton, Typography, List, ListItemText, ListItem, Collapse }
 import React from "react";
 import Cast from "../../../model/castmodel";
 
+/**
+ * React fragment to represent the cast subpage
+ * 
+ * @param props - props object holding the elements highlighted name and the array of cast objects to display
+ * @returns - A react fragment
+ */
 
 export function CastList(props: {name: String, data: Cast[]}){
     const {name, data } = props;

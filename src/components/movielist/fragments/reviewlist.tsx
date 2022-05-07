@@ -3,6 +3,13 @@ import { Stack, Box, Typography, IconButton, Collapse } from "@mui/material";
 import React from "react";
 import Review from "../../../model/reviewmodel";
 
+/**
+ * React fragment to represent the reviews subpage
+ * 
+ * @param props - props object holding the the array of review objects to display
+ * @returns - A react fragment
+ */
+
 function RenderedReview(props: {data:Review}){
     const { data } = props;
 

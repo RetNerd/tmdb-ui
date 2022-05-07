@@ -6,8 +6,15 @@ import { WikiModalLink } from "../../wikimodal/wikimodal";
 import { CastList } from "./castlist";
 import { ReviewList } from "./reviewlist";
 
-export function Row(props: {row: Movie}){
-    const {row} = props;
+/**
+ * React fragment to represent a single row of the movies table
+ * 
+ * @param props - props object holding the array of movie objects to display
+ * @returns - A react fragment
+ */
+
+export function Row(props: {row: Movie, relatedHandler: Function}){
+    const {row, relatedHandler} = props;
     const [open, setOpen] = React.useState(false);
     return(
         <React.Fragment>
@@ -23,7 +30,9 @@ export function Row(props: {row: Movie}){
                 </TableCell>
                 <TableCell className="movie-cell thumbnail"><img alt="Not provided" src={row.thumbUrl.toString()} 
                 /></TableCell>
-                <TableCell className="movie-cell">{row.name}</TableCell>
+                <TableCell className="movie-cell">
+                    <WikiModalLink movieId={row.id} relatedHandler={relatedHandler} name={row.name} searchTerm={row.name+" (movie) "+row.released.getFullYear()}></WikiModalLink>
+                    </TableCell>
                 <TableCell className="movie-cell">{row.category}</TableCell>
                 <TableCell className="movie-cell">{row.released.getFullYear()}</TableCell>
                 <TableCell className="movie-cell">{row.score}</TableCell>
@@ -38,7 +47,6 @@ export function Row(props: {row: Movie}){
                             </Typography>
                             <ReviewList name="Reviews" data={row.reviews}/>
                             <CastList name="Cast" data={row.cast}/>
-                            <WikiModalLink name="External" searchTerm={row.name+" (movie) "+row.released.getFullYear()}></WikiModalLink>
                         </List>
                     </Collapse>
                 </TableCell>

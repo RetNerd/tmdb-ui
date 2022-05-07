@@ -5,11 +5,18 @@ import Movie from "../../model/moviemodel";
 import "./movielist.css"
 import { Row } from "./fragments/row";
 
-export default class MovieList extends React.Component<any, { data: Movie[] }>{
+/**
+ * React component to represent the movie list
+ * 
+ * @param props - props object holding the array of movie objects to display
+ * @returns - A react component
+ */
+
+export default class MovieList extends React.Component<any, { data: Movie[], relatedHandler:Function }>{
 
     constructor(props: any){
         super(props);
-        this.state = {data: this.props.data};
+        this.state = {data: this.props.data, relatedHandler: this.props.relatedHandler};
     }
 
     updateData(data: Movie[]){
@@ -34,7 +41,7 @@ export default class MovieList extends React.Component<any, { data: Movie[] }>{
                     </TableHead>
                     <TableBody>
                         {this.state.data.map((movie: Movie) => (
-                            <Row key = {movie.id.toString()} row = {movie}/> 
+                            <Row relatedHandler={this.state.relatedHandler} key = {movie.id.toString()} row = {movie}/> 
                         ))}
                     </TableBody>
                 </Table>

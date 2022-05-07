@@ -2,6 +2,10 @@ import {TextField} from "@mui/material"
 import React from "react"
 import "./searchfield.css"
 
+/**
+ * A wrapper for a {@link https://mui.com/material-ui/react-text-field/ material ui textfield} to be used as a search field
+ */
+
 export default class SearchField extends React.Component<{}, { value: string }>{
     constructor(props: Object){
         super(props)
