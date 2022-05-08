@@ -25,5 +25,6 @@ Even if you leave the container port as is, the -p switch is mandatory for the a
 
 ## Known issues
 Movie list loads slowly: This could be solved by querying reviews and cast in separate graphql queries for only the specific movie.  
+Doesn't render very nicely on smaller displays: This could be solved by further customizing current material-ui layouts  
 Tests: Oh boy...
 
